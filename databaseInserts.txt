@@ -1,0 +1,15 @@
+//inserts to table `clients`
+INSERT INTO `gym-v1`.`clients` (`name`, `surname`, `middle_name`, `phone_number`, `gender`, `birthday`, `cart_number`) VALUES ('Игорь', 'Яремчук', 'Романович', '80291259076', 'm', '1998-06-09', '30');
+INSERT INTO `gym-v1`.`clients` (`name`, `surname`, `middle_name`, `phone_number`, `gender`, `birthday`, `cart_number`) VALUES ('Владислав', 'Шеремет', 'Сергеевич', '80291596658', 'm', '1998-04-09', '29');
+INSERT INTO `gym-v1`.`clients` (`name`, `surname`, `middle_name`, `phone_number`, `gender`, `birthday`, `cart_number`) VALUES ('Владислав', 'Яремчук', 'Романович', '80293865853', 'm', '1993-03-26', '44');
+INSERT INTO `gym-v1`.`clients` (`name`, `surname`, `middle_name`, `phone_number`, `gender`, `birthday`, `cart_number`) VALUES ('Катаржина', 'Данилецкая', 'Станиславовна', '80291111111', 'w', '1993-11-25', '545');
+INSERT INTO `gym-v1`.`clients` (`name`, `surname`, `middle_name`, `phone_number`, `gender`, `birthday`, `cart_number`) VALUES ('Маркова', 'Анастасия', 'Александровна', '80295715105', 'w', '1998-01-17', '69');
+INSERT INTO `gym-v1`.`clients` (`name`, `surname`, `middle_name`, `phone_number`, `gender`, `birthday`, `cart_number`) VALUES ('Бондаренко', 'Даниил', 'Дурень', '80295656566', 'm', '1998-05-15', '322');
+
+//inserts to table `subscriptions`
+INSERT INTO `gym-v1`.`subscriptions` (`name`, `guest_visits`, `day_count`, `training_count`) VALUES ('Поддарочный', '2', '30', '88');
+INSERT INTO `gym-v1`.`subscriptions` (`name`, `guest_visits`, `day_count`, `training_count`) VALUES ('Безлимит', '7', '37', '88');
+INSERT INTO `gym-v1`.`subscriptions` (`name`, `guest_visits`, `day_count`, `training_count`) VALUES ('Дневной', '0', '30', '12');
+INSERT INTO `gym-v1`.`subscriptions` (`name`, `guest_visits`, `day_count`, `training_count`) VALUES ('Вечерний', '0', '15', '8');
+INSERT INTO `gym-v1`.`subscriptions` (`name`, `guest_visits`, `day_count`, `training_count`) VALUES ('Студенческий', '0', '30', '88');
+INSERT INTO `gym-v1`.`subscriptions` (`name`, `guest_visits`, `day_count`, `training_count`) VALUES ('Студенческий15', '0', '15', '5');
