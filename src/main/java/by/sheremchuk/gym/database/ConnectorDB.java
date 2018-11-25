@@ -33,5 +33,4 @@ public class ConnectorDB {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 
-
 }
