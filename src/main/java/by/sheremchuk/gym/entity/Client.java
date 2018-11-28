@@ -19,6 +19,9 @@ public class Client {
     private int cardNumber;
     private String fio;
 
+    public Client() {
+    }
+
     public Client(int id,
                   String name,
                   String surname,
