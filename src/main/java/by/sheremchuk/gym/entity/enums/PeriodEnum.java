@@ -14,4 +14,15 @@ public enum  PeriodEnum {
     public String getValue() {
         return value;
     }
+
+    public static PeriodEnum fromString(String parameterName) {
+        if (parameterName != null) {
+            for (PeriodEnum period : PeriodEnum.values()) {
+                if (parameterName.equalsIgnoreCase(period.value)) {
+                    return period;
+                }
+            }
+        }
+        return null;
+    }
 }

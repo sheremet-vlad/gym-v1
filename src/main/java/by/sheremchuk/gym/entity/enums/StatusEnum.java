@@ -13,4 +13,15 @@ public enum StatusEnum {
     public String getValue() {
         return value;
     }
+
+    public static StatusEnum fromString(String parameterName) {
+        if (parameterName != null) {
+            for (StatusEnum status : StatusEnum.values()) {
+                if (parameterName.equalsIgnoreCase(status.value)) {
+                    return status;
+                }
+            }
+        }
+        return null;
+    }
 }
