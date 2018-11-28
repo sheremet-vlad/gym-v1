@@ -18,9 +18,17 @@ public class MainPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Client> tempList = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
-            tempList.add(new Client(i,"Igor" + i, "Yaremchuk" + i, "Romanich" + i,
-                    "80291111111", GenderEnum.MAN, StatusEnum.OUT, "", new Date(), 11));
+        for (int i = 0; i < 20; i++) {
+
+            Client client = new Client(i,"Igor" + i, "Yaremchuk" + i, "Romanich" + i,
+                    "80291111111", GenderEnum.MAN, StatusEnum.OUT, "", new Date(), 11);
+
+            client.setFio(client.getSurname() + " "
+                    + client.getName() + " "
+                    + client.getMiddleName());
+
+            tempList.add(client);
+
         }
 
         request.setAttribute("clients", tempList);
