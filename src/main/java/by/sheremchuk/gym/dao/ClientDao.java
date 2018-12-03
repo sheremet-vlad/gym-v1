@@ -14,17 +14,27 @@ import java.util.List;
 import java.util.Optional;
 
 public class ClientDao implements Dao {
-    private final static String QUERY_FIND_ALL_CLIENT = "SELECT * FROM clients";
 
-    public Optional<List<Client>> findAllClient() throws DaoException{
+    public Optional<List<Client>> findClientByCardNumber(int cardNumber)  throws DaoException{
+        String queryFIndClientByCardNumber = "SELECT * FROM clients WHERE `cart_Number`='" + cardNumber + "'";
+        return getClient(queryFIndClientByCardNumber);
+    }
+
+    public Optional<List<Client>> findClientBySurname(String surname)  throws DaoException{
+        String queryFindClientBySurname = "SELECT * FROM clients WHERE surname = '" + surname + "'";
+        return getClient(queryFindClientBySurname);
+    }
+    public Optional<List<Client>> findAllClient()  throws DaoException{
+        String queryFindAllClients = "SELECT * FROM clients";
+        return getClient(queryFindAllClients);
+    }
+
+    private Optional<List<Client>> getClient(String query) throws DaoException {
         List<Client> clients = new ArrayList<>();
         Statement statement;
-
         try {
             statement = ConnectorDB.getConnection().createStatement();
-
-            ResultSet request = statement.executeQuery(QUERY_FIND_ALL_CLIENT);
-
+            ResultSet request = statement.executeQuery(query);
             while (request.next()) {
                 clients.add(createClient(request));
             }
@@ -49,6 +59,7 @@ public class ClientDao implements Dao {
         client.setComments(request.getString("comments"));
         client.setBirthday(request.getDate("birthday"));
         client.setCardNumber(request.getInt("cart_number"));
+        client.setFio(client.getSurname() + " " + client.getName() + " " + client.getMiddleName());
 
         return client;
     }

@@ -1,17 +1,15 @@
 package by.sheremchuk.gym.command;
 
-import java.util.Optional;
-
 public class CommandFactory {
-    private static final String FIND_ALL_CLIENTS = "findAllClients";
+    private static final String FIND_CLIENT_BY_CARD_NUMBER_OR_SURNAME = "Find";
 
     public static Command create(String commandName) {
 
         Command command = null;
 
         switch (commandName) {
-            case FIND_ALL_CLIENTS: {
-                command = new FindClientCommand();
+            case FIND_CLIENT_BY_CARD_NUMBER_OR_SURNAME: {
+                command = new FindClientByIdOrSurnameCommand();
             }
             break;
             default: {

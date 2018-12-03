@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class EmptyCommand implements Command {
     @Override
-    public boolean execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        return true;
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+
     }
 }
