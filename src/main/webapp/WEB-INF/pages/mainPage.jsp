@@ -6,13 +6,14 @@
 
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>Главная страница</title>
         <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/styles/mainPage.css">
     </head>
     <body>
         <form class="form-wrapper">
-            <input id="search" placeholder="Введите фамилию или номер карты" required="" type="text">
-            <input value="Поиск" id="submit" type="submit">
+            <input name="surnameOrCardNumber" id="search" placeholder="Введите фамилию или номер карты" required="" type="text">
+            <input name="command" value="Find" id="submit" type="submit">
         </form>
         <input value="Добавить нового клиента" class="addNewClient" id="addNewClient" type="submit">
         <div class="table-wrapper">
@@ -90,7 +91,7 @@
                 </table>
             </div>
 
-            <button class="btnFooter" id="statistic">Статистика</button>
+            <input type="submit" name="command" value="Statistic" class="btnFooter"/>
             <button class="btnFooter" id="newAbonement">Новый абонемент</button>
             <button class="btnFooter" id="editAbonement">Редактировать абонемент</button>
         </div>
