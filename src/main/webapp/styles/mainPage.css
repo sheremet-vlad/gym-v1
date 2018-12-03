@@ -148,14 +148,14 @@
     background-image: -webkit-linear-gradient(top, #f6f6f6, #eae8e8);
 }
 
-table {
+.mainTable {
     table-layout: auto;
     height: 600px;
     width: 1000px;
     word-wrap: break-word;
 }
 
-th {
+.mainTableTH {
     width: auto;
     text-align: center;
     height: 40px;
@@ -164,7 +164,7 @@ th {
     position: sticky;
     top: 1px;
 }
-td {
+.mainTableTD {
     width: auto;
     text-align: center;
     height: 20px;
