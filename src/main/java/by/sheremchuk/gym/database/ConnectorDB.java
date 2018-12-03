@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class ConnectorDB {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "1234";
-    private static final String URL ="jdbc:mysql://localhost:3306/gym-v1?useSSL=false";
+    private static final String URL ="jdbc:mysql://localhost:3306/gym-v1?useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useSSL=false";
 
     public static Connection getConnection() throws SQLException {
         Driver driver;
