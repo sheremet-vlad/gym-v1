@@ -9,7 +9,6 @@
         <meta charset="UTF-8">
         <title>Главная страница</title>
         <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/styles/mainPage.css">
-<<<<<<< HEAD
         <script>
             function tableSearch() {
                 var phrase = document.getElementById('search');
@@ -31,7 +30,7 @@
                 }
             }
         </script>
-=======
+
         <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
         <script>
             //----------------------------------------
