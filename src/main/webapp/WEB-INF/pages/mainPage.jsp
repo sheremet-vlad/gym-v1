@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -13,9 +13,12 @@
     <body>
         <form class="form-wrapper">
             <input name="surnameOrCardNumber" id="search" placeholder="Введите фамилию или номер карты" required="" type="text">
-            <input name="command" value="Find" id="submit" type="submit">
+            <button name="command" value="buttonFind" id="submit">Найти</button>
         </form>
         <input value="Добавить нового клиента" class="addNewClient" id="addNewClient" type="submit">
+        <c:if test="${not empty message}">
+            <div>${message}</div>
+        </c:if>
         <div class="table-wrapper">
             <table>
                 <thead>

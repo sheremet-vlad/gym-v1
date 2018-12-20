@@ -15,9 +15,10 @@ public class ConnectorDB {
     public static Connection getConnection() throws SQLException {
         Driver driver;
         try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
             driver = new FabricMySQLDriver();
         }
-        catch (SQLException ex) {
+        catch (Exception ex) {
             System.out.println("Произошла ошибка при создании драйвера");
             return null;
         }
