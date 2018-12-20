@@ -9,6 +9,29 @@
         <meta charset="UTF-8">
         <title>Главная страница</title>
         <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/styles/mainPage.css">
+<<<<<<< HEAD
+        <script>
+            function tableSearch() {
+                var phrase = document.getElementById('search');
+                var table = document.getElementById('info-table');
+                var regPhrase = new RegExp(phrase.value, 'i');
+                var flag = false;
+                for (var i = 1; i < table.rows.length; i++) {
+                    flag = false;
+                    for (var j = table.rows[3].cells.length - 1; j >= 1; j--) {
+                        flag = regPhrase.test(table.rows[i].cells[j].innerHTML);
+                        if (flag) break;
+                    }
+                    if (flag) {
+                        table.rows[i].style.display = "";
+                    } else {
+                        table.rows[i].style.display = "none";
+                    }
+
+                }
+            }
+        </script>
+=======
         <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
         <script>
             //----------------------------------------
@@ -65,12 +88,10 @@
             }
             //------------------------------------------------
         </script>
-
     </head>
     <body>
         <form class="form-wrapper">
-            <input name="surnameOrCardNumber" id="search" placeholder="Введите фамилию или номер карты" required="" type="text">
-            <button name="command" value="buttonFind" id="submit">Найти</button>
+            <input name="surnameOrCardNumber" placeholder="Введите фамилию или номер карты" class="form-control"required="" type="text" id="search" onkeyup="tableSearch()">
         </form>
 
         <div>
@@ -106,8 +127,9 @@
 
             </div>
         </div>
-        <div class="table-wrapper">
-            <table>
+
+        <div class="table-wrapper ">
+            <table class="table table-striped" id="info-table">
                 <thead>
                 <tr>
                     <th>№</th>
@@ -121,7 +143,6 @@
                     <th>Статус</th>
                 </tr>
                 </thead>
-
                 <c:forEach var="client" items="${clients}">
                     <tbody>
 
