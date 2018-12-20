@@ -9,16 +9,103 @@
         <meta charset="UTF-8">
         <title>Главная страница</title>
         <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/styles/mainPage.css">
+        <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+        <script>
+            //----------------------------------------
+            $(document).ready(function(){
+                //Скрыть PopUp при загрузке страницы
+                PopUpHideStatistic();
+            });
+            //Функция отображения PopUp
+            function PopUpShowStatistic(){
+                $("#popupStatistic").show();
+            }
+            //Функция скрытия PopUp
+            function PopUpHideStatistic(){
+                $("#popupStatistic").hide();
+            }
+            //-------------------------------------------
+            $(document).ready(function(){
+                //Скрыть PopUp при загрузке страницы
+                PopUpHideEditAbon();
+            });
+            //Функция отображения PopUp
+            function PopUpShowEditAbon(){
+                $("#popupEditAbon").show();
+            }
+            //Функция скрытия PopUp
+            function PopUpHideEditAbon(){
+                $("#popupEditAbon").hide();
+            }
+            /*--------------------------------------*/
+            $(document).ready(function(){
+                //Скрыть PopUp при загрузке страницы
+                PopUpHideNewAbon();
+            });
+            //Функция отображения PopUp
+            function PopUpShowNewAbon(){
+                $("#popupNewAbon").show();
+            }
+            //Функция скрытия PopUp
+            function PopUpHideNewAbon(){
+                $("#popupNewAbon").hide();
+            }
+            //----------------------------------------------
+            $(document).ready(function(){
+                //Скрыть PopUp при загрузке страницы
+                PopUpHideaddNewClient();
+            });
+            //Функция отображения PopUp
+            function PopUpShowaddNewClient(){
+                $("#popupaddNewClient").show();
+            }
+            //Функция скрытия PopUp
+            function PopUpHideaddNewClient(){
+                $("#popupaddNewClient").hide();
+            }
+            //------------------------------------------------
+        </script>
+
     </head>
     <body>
         <form class="form-wrapper">
             <input name="surnameOrCardNumber" id="search" placeholder="Введите фамилию или номер карты" required="" type="text">
             <button name="command" value="buttonFind" id="submit">Найти</button>
         </form>
-        <input value="Добавить нового клиента" class="addNewClient" id="addNewClient" type="submit">
-        <c:if test="${not empty message}">
-            <div>${message}</div>
-        </c:if>
+
+        <div>
+            <a href="javascript:PopUpShowaddNewClient()">
+                <input value="Добавить нового клиента" class="addNewClient" id="addNewClient" type="submit">
+            </a>
+        </div>
+        <div class="b-popup-Statistic" id="popupaddNewClient">
+            <div class="b-popup-content">
+                <h2>Добавление нового клиента</h2>
+                <form name="MyForm" >
+                    <p>Имя</p>
+                    <input class="input" name="name" type="text"  />
+                    <p>Фамилия</p>
+                    <input class="input" name="surname" type="text" />
+                    <p>Отчество</p>
+                    <input class="input" name="middlename" type="text"  />
+                    <p>День рождения</p>
+                    <input class="input" name="birthday" type="text" />
+                    <p>Пол</p>
+                    <input class="input" name="gender" type="text"  />
+                    <p>Контактный телефон</p>
+                    <input class="input" name="phone" type="text" />
+                    <p>Комментарии</p>
+                    <textarea name="comments" type="text">
+
+                    </textarea>
+                    <p>
+                        <input id="create" value="Добавить" type="submit" />
+                        <a href="javascript:PopUpHideaddNewClient()">Back</a>
+                    </p>
+                </form>
+
+            </div>
+        </div>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -94,9 +181,44 @@
                 </table>
             </div>
 
-            <input type="submit" name="command" value="Statistic" class="btnFooter"/>
-            <button class="btnFooter" id="newAbonement">Новый абонемент</button>
-            <button class="btnFooter" id="editAbonement">Редактировать абонемент</button>
+            <div class="b-container-Statistic">
+                <a href="javascript:PopUpShowStatistic()">
+                    <input type="submit" name="command" value="Statistic" class="btnFooter"/>
+                </a>
+            </div>
+            <div class="b-popup-Statistic" id="popupStatistic">
+                <div class="b-popup-content">
+                    Text in Popup
+                    <a href="javascript:PopUpHideStatistic()">Back</a>
+                </div>
+            </div>
+
+            <div class="b-container-Statistic">
+                <a href="javascript:PopUpShowEditAbon()">
+                    <button class="btnFooter" id="newAbonement">Новый абонемент</button>
+                </a>
+            </div>
+            <div class="b-popup-Statistic" id="popupNewAbon">
+                <div class="b-popup-content">
+                    Text in Popup
+                    <a href="javascript:PopUpHideEditAbon()">Back</a>
+                </div>
+            </div>
+
+            <div>
+                <a href="javascript:PopUpShowEditAbon()">
+                    <button class="btnFooter" id="editAbonement">Редактировать абонемент</button>
+                </a>
+            </div>
+            <div class="b-popup-Statistic" id="popupEditAbon">
+                <div class="b-popup-content">
+                    Text in Popup
+                    <a href="javascript:PopUpHideEditAbon()">Back</a>
+                </div>
+            </div>
+
+
+
         </div>
     </body>
 </html>
