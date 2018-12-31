@@ -21,13 +21,17 @@ import java.util.List;
 import java.util.Optional;
 
 public class MainPageServlet extends HttpServlet {
+    private final static String CLEAR_PARAMETERS_ATTRIBUTE = "isClearParameter";
 
     private final static String COMMAND_PARAMETER = "command";
     private List<Client> clientList;
+    private CommandFactory commandFactory;
     @Override
     public void init() throws ServletException{
         super.init();
-        ClientService clientService = new ClientService();
+        commandFactory = CommandFactory.getInstance();
+        ClientService clientService = ClientService.getInstance();
+
         try {
             clientList = clientService.findAllClients().orElse(new ArrayList<>());
         } catch (ServiceException e) {
@@ -36,15 +40,18 @@ public class MainPageServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String page = "/WEB-INF/pages/mainPage.jsp";
+        request.setAttribute("clients", clientList);
+        request.setAttribute(CLEAR_PARAMETERS_ATTRIBUTE, false);
+
         response.setCharacterEncoding("UTF-8");
+
         String command = request.getParameter(COMMAND_PARAMETER);
         if (command == null) {
             command = "";
         }
-        Command action = CommandFactory.create(command);
-        String page = "/WEB-INF/pages/mainPage.jsp";
-        request.setAttribute("message",request.getParameter("surnameOrCardNumber"));
+        Command action = commandFactory.create(command);
 
         try {
             action.execute(request, response);
@@ -52,13 +59,22 @@ public class MainPageServlet extends HttpServlet {
             e.printStackTrace();
             page = "/WEB-INF/pages/errorPage.jsp";
         }
-        request.setAttribute("clients", clientList);
-        dispatch(request, response, page);
+
+        boolean isClearParameter = (boolean) request.getAttribute(CLEAR_PARAMETERS_ATTRIBUTE);
+
+        if(isClearParameter) {
+            redirect(response);
+        } else {
+            forward(request, response, page);
+        }
     }
 
-
-    private void dispatch(HttpServletRequest request, HttpServletResponse response, String page) throws ServletException, IOException {
+    private void forward(HttpServletRequest request, HttpServletResponse response, String page) throws ServletException, IOException {
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
+    }
+
+    private void redirect(HttpServletResponse response) throws IOException {
+        response.sendRedirect(getServletContext().getContextPath() + "/main-page");
     }
 }

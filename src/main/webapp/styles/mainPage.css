@@ -292,7 +292,7 @@ td {
 .b-popup-Statistic .b-popup-content{
     margin:40px auto 0px auto;
     width:500px;
-    height: 600px;
+    height: 680px;
     padding:10px;
     background-color: #c5c5c5;
     border-radius:5px;
@@ -326,7 +326,7 @@ td {
 }
 #respond input[type=text]:focus textarea{
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-    margin: 5px 1px 3px 0px;
+    margin: 5px 1px 3px 0;
     border: 1px solid rgba(81, 203, 238, 1);
 }
 
@@ -338,4 +338,14 @@ td {
 .b-popup-content input[type=text] {
     width: 200px;
     font-size: 14pt;
+}
+
+.error {
+    color: red;
+    font-size: 20px;
+}
+
+.message {
+    color: green;
+    font-size: 20px;
 }
