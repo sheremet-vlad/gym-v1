@@ -280,7 +280,7 @@ td {
     border: 0;
 }
 
-.b-popup-Statistic{
+.b-popup{
     width:100%;
     z-index: 999999;
     min-height:100%;
@@ -289,7 +289,7 @@ td {
     position:fixed;
     top:0px;
 }
-.b-popup-Statistic .b-popup-content{
+.b-popup .b-popup-content{
     margin:40px auto 0px auto;
     width:500px;
     height: 680px;

@@ -50,41 +50,41 @@
             //-------------------------------------------
             $(document).ready(function(){
                 //Скрыть PopUp при загрузке страницы
-                PopUpHideEditAbon();
+                PopUpHideEditSubscription();
             });
             //Функция отображения PopUp
-            function PopUpShowEditAbon(){
-                $("#popupEditAbon").show();
+            function PopUpShowEditSubscription(){
+                $("#popupEditSubscription").show();
             }
             //Функция скрытия PopUp
-            function PopUpHideEditAbon(){
-                $("#popupEditAbon").hide();
+            function PopUpHideEditSubscription(){
+                $("#popupEditSubscription").hide();
             }
             /*--------------------------------------*/
             $(document).ready(function(){
                 //Скрыть PopUp при загрузке страницы
-                PopUpHideNewAbon();
+                PopUpHideNewSubscription();
             });
             //Функция отображения PopUp
-            function PopUpShowNewAbon(){
-                $("#popupNewAbon").show();
+            function PopUpShowNewSubscription(){
+                $("#popupNewSubscription").show();
             }
             //Функция скрытия PopUp
-            function PopUpHideNewAbon(){
-                $("#popupNewAbon").hide();
+            function PopUpHideNewSubscription(){
+                $("#popupNewSubscription").hide();
             }
             //----------------------------------------------
             $(document).ready(function(){
                 //Скрыть PopUp при загрузке страницы
-                PopUpHideaddNewClient();
+                PopUpHideAddNewClient();
             });
             //Функция отображения PopUp
-            function PopUpShowaddNewClient(){
-                $("#popupaddNewClient").show();
+            function PopUpShowAddNewClient(){
+                $("#popupAddNewClient").show();
             }
             //Функция скрытия PopUp
-            function PopUpHideaddNewClient(){
-                $("#popupaddNewClient").hide();
+            function PopUpHideAddNewClient(){
+                $("#popupAddNewClient").hide();
             }
             //------------------------------------------------
         </script>
@@ -103,7 +103,7 @@
         </c:if>
 
         <div>
-            <a href="javascript:PopUpShowaddNewClient()">
+            <a href="javascript:PopUpShowAddNewClient()">
                 <input value="Добавить нового клиента" class="addNewClient" id="addNewClient" type="submit">
             </a>
         </div>
@@ -120,34 +120,34 @@
                     <input type="submit" name="command" value="Statistic" class="btnFooter"/>
                 </a>
             </div>
-            <div class="b-popup-Statistic" id="popupStatistic">
+            <div class="b-popup" id="popupStatistic">
                 <div class="b-popup-content">
-                    Text in Popup
+                    Text in Popup statistic
                     <a href="javascript:PopUpHideStatistic()">Back</a>
                 </div>
             </div>
 
-            <div class="b-container-Statistic">
-                <a href="javascript:PopUpShowEditAbon()">
-                    <button class="btnFooter" id="newAbonement">Новый абонемент</button>
+            <div class="b-container-newSubscription">
+                <a href="javascript:PopUpShowNewSubscription()">
+                    <button class="btnFooter" id="newSubscription">Новый абонемент</button>
                 </a>
             </div>
-            <div class="b-popup-Statistic" id="popupNewAbon">
+            <div class="b-popup" id="popupNewSubscription">
                 <div class="b-popup-content">
-                    Text in Popup
-                    <a href="javascript:PopUpHideEditAbon()">Back</a>
+                    Text in Popup new sub
+                    <a href="javascript:PopUpHideNewSubscription()">Back</a>
                 </div>
             </div>
 
             <div>
-                <a href="javascript:PopUpShowEditAbon()">
-                    <button class="btnFooter" id="editAbonement">Редактировать абонемент</button>
+                <a href="javascript:PopUpShowEditSubscription()">
+                    <button class="btnFooter" id="editSubscription">Редактировать абонемент</button>
                 </a>
             </div>
-            <div class="b-popup-Statistic" id="popupEditAbon">
+            <div class="b-popup" id="popupEditSubscription">
                 <div class="b-popup-content">
-                    Text in Popup
-                    <a href="javascript:PopUpHideEditAbon()">Back</a>
+                    Text in Popup edit sub
+                    <a href="javascript:PopUpHideEditSubscription()">Back</a>
                 </div>
             </div>
         </div>

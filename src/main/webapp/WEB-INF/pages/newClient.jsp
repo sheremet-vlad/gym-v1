@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 
-<div class="b-popup-Statistic" id="popupaddNewClient">
+<div class="b-popup" id="popupAddNewClient">
     <div class="b-popup-content">
         <h2>Добавление нового клиента</h2>
         <form name="MyForm" >
@@ -27,7 +27,7 @@
             </label>
             <p>
                 <button name="command" value="addClient" >Добавить</button>
-                <a href="javascript:PopUpHideaddNewClient()">Back</a>
+                <a href="javascript:PopUpHideAddNewClient()">Back</a>
             </p>
         </form>
 
