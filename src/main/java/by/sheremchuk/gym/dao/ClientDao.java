@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ClientDao implements Dao {
-    private final static String REPLACE_REGEX = "var";
+        private final static String REPLACE_REGEX = "var";
 
     private final static String DATE_REGEX = "yyyy-MM-dd";
 

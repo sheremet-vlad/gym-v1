@@ -1,9 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 
+<div>
+    <a href="javascript:PopUpShowAddNewClient()">
+        <input value="Добавить нового клиента" class="addNewClient" id="addNewClient" type="submit">
+    </a>
+</div>
+
 <div class="b-popup" id="popupAddNewClient">
     <div class="b-popup-content">
         <h2>Добавление нового клиента</h2>
-        <form name="MyForm" >
+        <form name="MyForm" method="post">
             <p>Имя</p>
             <input class="input" name="nameAdd" type="text" value="${param.nameAdd}"/>
             <p>Фамилия</p>
@@ -26,7 +32,7 @@
                 <textarea name="commentsAdd" type="text">${param.commentsAdd}</textarea>
             </label>
             <p>
-                <button name="command" value="addClient" >Добавить</button>
+                <button class="button-add" name="command" value="addClient" >Добавить</button>
                 <a href="javascript:PopUpHideAddNewClient()">Back</a>
             </p>
         </form>

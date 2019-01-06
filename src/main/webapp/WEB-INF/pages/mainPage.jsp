@@ -102,12 +102,6 @@
             <div class="message">${message}</div>
         </c:if>
 
-        <div>
-            <a href="javascript:PopUpShowAddNewClient()">
-                <input value="Добавить нового клиента" class="addNewClient" id="addNewClient" type="submit">
-            </a>
-        </div>
-
         <jsp:include page="newClient.jsp"/>
 
         <jsp:include page="clientTable.jsp"/>
@@ -127,29 +121,10 @@
                 </div>
             </div>
 
-            <div class="b-container-newSubscription">
-                <a href="javascript:PopUpShowNewSubscription()">
-                    <button class="btnFooter" id="newSubscription">Новый абонемент</button>
-                </a>
-            </div>
-            <div class="b-popup" id="popupNewSubscription">
-                <div class="b-popup-content">
-                    Text in Popup new sub
-                    <a href="javascript:PopUpHideNewSubscription()">Back</a>
-                </div>
-            </div>
+            <jsp:include page="newSubscription.jsp"/>
 
-            <div>
-                <a href="javascript:PopUpShowEditSubscription()">
-                    <button class="btnFooter" id="editSubscription">Редактировать абонемент</button>
-                </a>
-            </div>
-            <div class="b-popup" id="popupEditSubscription">
-                <div class="b-popup-content">
-                    Text in Popup edit sub
-                    <a href="javascript:PopUpHideEditSubscription()">Back</a>
-                </div>
-            </div>
+            <jsp:include page="editSubscription.jsp"/>
+
         </div>
     </body>
 </html>

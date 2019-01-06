@@ -3,6 +3,7 @@ package by.sheremchuk.gym.command;
 public class CommandFactory {
     private static final String FIND_CLIENT_BY_CARD_NUMBER_OR_SURNAME = "Find";
     private static final String ADD_CLIENT = "addClient";
+    private static final String ADD_SUBSCRIPTION = "addSubscription";
 
     private static volatile CommandFactory instance;
     private final static Object lock = new Object();
@@ -34,6 +35,10 @@ public class CommandFactory {
             break;
             case ADD_CLIENT: {
                 command = new AddClientCommand();
+            }
+            break;
+            case ADD_SUBSCRIPTION: {
+                command = new AddSubscriptionCommand();
             }
             break;
             default: {

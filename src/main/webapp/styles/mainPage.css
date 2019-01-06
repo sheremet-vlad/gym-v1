@@ -299,6 +299,10 @@ td {
     box-shadow: 0px 0px 10px #000;
 }
 
+.b-popup-add-subscription .b-popup-content-subscription {
+    height: 320px;
+}
+
 
 #create {
     font-family: sans-serif;
@@ -348,4 +352,20 @@ td {
 .message {
     color: green;
     font-size: 20px;
+}
+
+.training-count {
+    display: inline;
+}
+
+.radio-training-count {
+    border-left: 2px solid black;
+}
+
+.button-add {
+    margin: 30px 10px 0 0;
+}
+
+.b-container-editSubscription {
+    height: 700px;
 }
