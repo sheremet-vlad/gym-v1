@@ -369,3 +369,7 @@ td {
 .b-container-editSubscription {
     height: 700px;
 }
+
+.hidden-button {
+    display: none;
+}

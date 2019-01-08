@@ -4,6 +4,8 @@ public class CommandFactory {
     private static final String FIND_CLIENT_BY_CARD_NUMBER_OR_SURNAME = "Find";
     private static final String ADD_CLIENT = "addClient";
     private static final String ADD_SUBSCRIPTION = "addSubscription";
+    private static final String LOAD_SUBSCRIPTION_INFO_IN_EDIT= "loadSubscriptionInfoInEdit";
+    private static final String EDIT_SUBSCRIPTION = "editSubscriptionCommand";
 
     private static volatile CommandFactory instance;
     private final static Object lock = new Object();
@@ -39,6 +41,14 @@ public class CommandFactory {
             break;
             case ADD_SUBSCRIPTION: {
                 command = new AddSubscriptionCommand();
+            }
+            break;
+            case EDIT_SUBSCRIPTION: {
+                command = new EditSubscriptionCommand();
+            }
+            break;
+            case LOAD_SUBSCRIPTION_INFO_IN_EDIT: {
+                command = new LoadSubscriptionInfoCommand();
             }
             break;
             default: {

@@ -87,6 +87,7 @@
                 $("#popupAddNewClient").hide();
             }
             //------------------------------------------------
+
         </script>
     </head>
 
@@ -126,5 +127,6 @@
             <jsp:include page="editSubscription.jsp"/>
 
         </div>
+
     </body>
 </html>

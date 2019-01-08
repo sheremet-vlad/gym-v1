@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.sheremchuk.gym.variable.AttributeName.SUBSCRIPTIONS_LIST_ATTRIBUTE;
+
 public class MainPageServlet extends HttpServlet {
     private final static String CLEAR_PARAMETERS_ATTRIBUTE = "isClearParameter";
 
@@ -44,7 +46,7 @@ public class MainPageServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page = "/WEB-INF/pages/mainPage.jsp";
         request.setAttribute("clients", clientList);
-        request.setAttribute("subscriptions", subscriptionList);
+        request.setAttribute(SUBSCRIPTIONS_LIST_ATTRIBUTE, subscriptionList);
         request.setAttribute(CLEAR_PARAMETERS_ATTRIBUTE, false);
 
         response.setCharacterEncoding("UTF-8");
