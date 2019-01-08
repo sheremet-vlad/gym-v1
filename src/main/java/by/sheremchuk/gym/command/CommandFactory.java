@@ -6,6 +6,7 @@ public class CommandFactory {
     private static final String ADD_SUBSCRIPTION = "addSubscription";
     private static final String LOAD_SUBSCRIPTION_INFO_IN_EDIT= "loadSubscriptionInfoInEdit";
     private static final String EDIT_SUBSCRIPTION = "editSubscriptionCommand";
+    private static final String ADD_SUBSCRIPTION_TO_CLIENT = "addSubscriptionClient";
 
     private static volatile CommandFactory instance;
     private final static Object lock = new Object();
@@ -49,6 +50,10 @@ public class CommandFactory {
             break;
             case LOAD_SUBSCRIPTION_INFO_IN_EDIT: {
                 command = new LoadSubscriptionInfoCommand();
+            }
+            break;
+            case ADD_SUBSCRIPTION_TO_CLIENT: {
+                command = new AddSubscriptionToClientCommand();
             }
             break;
             default: {

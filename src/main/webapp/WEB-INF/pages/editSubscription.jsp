@@ -14,9 +14,8 @@
         }
     </script>
 </c:if>
-
 <div class="b-popup b-popup-edit-subscription" id="popupEditSubscription">
-    <div class="b-popup-content b-popup-content-subscription">
+    <div class="b-popup-content b-popup-content-subscription" style="height: 360px">
         <h2>Добавление нового абонемента</h2>
 
         <form method="post">
@@ -44,7 +43,7 @@
                 <p class="training-count radio-training-count">
                     <label>
                         <input class="input" name="subTrainingUnlimEdit" type="checkbox"
-                               ${currentSubscription.trainingCount == 88 ? 'checked="checked"' : ""}/>Безлим
+                        ${currentSubscription.trainingCount == 88 ? 'checked="checked"' : ""}/>Безлим
                     </label>
                 </p>
             </div>

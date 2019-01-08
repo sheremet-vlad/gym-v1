@@ -26,21 +26,17 @@
                 <td>10.11.2018-28.11.2018(15)</td>
                 <td>
                     <div class="content">
-                        <button class="buttonInTable" id="come">+</button>
+                        <input value="+" class="buttonInTable" id="come" type="submit">
                     </div>
                 </td>
                 <td>
                     <div class="content">
-                        <button class="buttonInTable" id="out">-</button>
+                        <input value="-" class="buttonInTable" id="out" type="submit">
                     </div>
                 <td>
-                    <div class="content">
-                        <button class="buttonInTable" id="clientInfo">...</button>
-                    </div>
+                    <jsp:include page="clientInfo.jsp"/>
                 <td>
-                    <div class="content">
-                        <button class="buttonInTable" id="abonementAdd">Добавить</button>
-                    </div>
+                    <jsp:include page="addSubscriptionClient.jsp"/>
                 </td>
                 <td>${client.status}</td>
             </tr>

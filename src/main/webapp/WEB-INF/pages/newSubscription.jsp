@@ -9,7 +9,6 @@
 <div class="b-popup b-popup-add-subscription" id="popupNewSubscription">
     <div class="b-popup-content b-popup-content-subscription">
         <h2>Добавление нового абонемента</h2>
-
         <form method="post">
             <p>Название</p>
             <input class="input" name="subNameAdd" type="text" value="${param.subNameAdd}"/>

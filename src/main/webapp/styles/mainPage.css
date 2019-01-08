@@ -299,6 +299,26 @@ td {
     box-shadow: 0px 0px 10px #000;
 }
 
+.b-popup-client-info {
+    width:100%;
+    z-index: 999999;
+    min-height:100%;
+    overflow:hidden;
+    position:fixed;
+    top:0px;
+}
+
+.b-popup-client-info .b-popup-content-client-info {
+    margin:40px auto 0px auto;
+    width:500px;
+    height: 680px;
+    padding:10px;
+    background-color: #c5c5c5;
+    border-radius:5px;
+    box-shadow: 0px 0px 10px #000;
+}
+
+
 .b-popup-add-subscription .b-popup-content-subscription {
     height: 320px;
 }
@@ -372,4 +392,8 @@ td {
 
 .hidden-button {
     display: none;
+}
+
+.installHeight {
+    height: 400px;
 }

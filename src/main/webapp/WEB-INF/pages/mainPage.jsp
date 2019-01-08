@@ -87,7 +87,32 @@
                 $("#popupAddNewClient").hide();
             }
             //------------------------------------------------
-
+            $(document).ready(function(){
+                //Скрыть PopUp при загрузке страницы
+                PopUpHideClientInfo();
+            });
+            //Функция отображения PopUp
+            function PopUpShowClientInfo(){
+                $("#popupClientInfo").show();
+            }
+            //Функция скрытия PopUp
+            function PopUpHideClientInfo(){
+                $("#popupClientInfo").hide();
+            }
+            //------------------------------------------------
+            $(document).ready(function(){
+                //Скрыть PopUp при загрузке страницы
+                PopUpHideAddSubscriptionClient();
+            });
+            //Функция отображения PopUp
+            function PopUpShowAddSubscriptionClient(){
+                $("#popupAddSubscriptionClient").show();
+            }
+            //Функция скрытия PopUp
+            function PopUpHideAddSubscriptionClient(){
+                $("#popupAddSubscriptionClient").hide();
+            }
+            //----------------------------------------------
         </script>
     </head>
 
@@ -126,7 +151,12 @@
 
             <jsp:include page="editSubscription.jsp"/>
 
+            <jsp:include page="popUpClientInfo.jsp"/>
+
+            <jsp:include page="popUpAddSubscriptionClient.jsp"/>
+
         </div>
+
 
     </body>
 </html>
