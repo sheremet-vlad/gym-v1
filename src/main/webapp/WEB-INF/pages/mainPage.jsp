@@ -60,6 +60,10 @@
             function PopUpHideEditSubscription(){
                 $("#popupEditSubscription").hide();
             }
+
+            function PopUpHideEditSubscription(){
+                $("#popupEditSubscription").hide();
+            }
             /*--------------------------------------*/
             $(document).ready(function(){
                 //Скрыть PopUp при загрузке страницы

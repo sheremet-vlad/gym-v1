@@ -47,25 +47,26 @@ public class SubscriptionService {
         return subscriptionDao.addSubscription(subscription);
     }
 
-    public Optional<Subscription> editSubscription(int currentSubscriptionName,
+    public Optional<Subscription> editSubscription(String currentSubscriptionName,
                                                    String name,
                                                    int period,
                                                    int guestVisit,
                                                    int trainingCount) throws ServiceException {
         Subscription subscription = createSubscription(name, period, guestVisit, trainingCount);
 
-        /*Optional<List<Subscription>> optionalSubcriptionList = subscriptionDao.findSubscriptionByName(currentSubscriptionName);
+        Optional<List<Subscription>> optionalSubcriptionList = subscriptionDao.findSubscriptionByName(currentSubscriptionName);
         List<Subscription> subscriptionList = optionalSubcriptionList.orElse(new ArrayList<>());
-
+        System.out.println(subscriptionList.size());
+        System.out.println(currentSubscriptionName);
         if (subscriptionList.size() != 1) {
             throw new ServiceException("Ошибка в базе данных");
         }
 
-        int currentSubscriptionId = subscriptionList.get(0).getSubcriptionId();*/
-        boolean result = subscriptionDao.updateSubscriptionByIndex(subscription, currentSubscriptionName);
+        int currentSubscriptionId = subscriptionList.get(0).getSubcriptionId();
+        boolean result = subscriptionDao.updateSubscriptionByIndex(subscription, currentSubscriptionId);
 
         if (result) {
-            subscription.setSubcriptionId(currentSubscriptionName);
+            subscription.setSubcriptionId(currentSubscriptionId);
         } else {
             throw new ServiceException("ошибка в базе данных, абонемент не обновлен");
         }

@@ -15,16 +15,17 @@
     </script>
 </c:if>
 
-<div class="b-popup b-popup-edit-subscription" id="popupEditSubscription">
-    <div class="b-popup-content b-popup-content-subscription">
+<div class="b-popup" id="popupEditSubscription">
+    <div class="b-popup-content b-popup-content-edit-subscription">
         <h2>Добавление нового абонемента</h2>
 
         <form method="post">
-            <input type="submit" class="hidden-button" id="buttonLoadSubscriptionInfo" name="command" value="loadSubscriptionInfoInEdit"/>
+            <input type="submit" class="hidden-button" id="buttonLoadSubscriptionInfo" name="command"
+                   value="loadSubscriptionInfoInEdit"/>
             <select id="editSelect" size="1" name="currentSubscriptionName" onchange="ClickLoadInfo();">
                 <option value="-1">Выберите абонемент</option>
                 <c:forEach var="subscription" items="${subscriptions}">
-                    <option value="${subscription.subcriptionId}" ${currentSubscription.subcriptionId == subscription.subcriptionId ? 'selected="selected"' : ''}>
+                    <option value="${subscription.name}" ${currentSubscription.subcriptionId == subscription.subcriptionId ? 'selected="selected"' : ''}>
                             ${subscription.name}
                     </option>
                 </c:forEach>
@@ -44,14 +45,14 @@
                 <p class="training-count radio-training-count">
                     <label>
                         <input class="input" name="subTrainingUnlimEdit" type="checkbox"
-                               ${currentSubscription.trainingCount == 88 ? 'checked="checked"' : ""}/>Безлим
+                        ${currentSubscription.trainingCount == 88 ? 'checked="checked"' : ""}/>Безлим
                     </label>
                 </p>
             </div>
 
             <p>
                 <button class="button-edit" name="command" value="editSubscriptionCommand">Изменить</button>
-                <a href="javascript:PopUpHideEditSubscription()">Back</a>
+                <a href="javascript:CloseEditSubscription()">Back</a>
             </p>
         </form>
 
@@ -61,5 +62,10 @@
 <script>
     function ClickLoadInfo() {
         document.getElementById("buttonLoadSubscriptionInfo").click();
+    }
+
+    function CloseEditSubscription() {
+        document.getElementById("editSelect").value = "-1";
+        ClickLoadInfo();
     }
 </script>

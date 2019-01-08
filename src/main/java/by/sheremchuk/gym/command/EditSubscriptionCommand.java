@@ -56,23 +56,16 @@ public class EditSubscriptionCommand extends MainPageServlet implements Command 
             }
 
             SubscriptionService service = SubscriptionService.getInstance();
-            Optional<Subscription> optionalSubscription = service.editSubscription(Integer.parseInt(currentSubscriptionName), name, period, guestVisits, trainingCount);
+            Optional<Subscription> optionalSubscription = service.editSubscription(currentSubscriptionName, name, period, guestVisits, trainingCount);
 
             if (optionalSubscription.isPresent()) {
                 Subscription subscription = optionalSubscription.get();
-                System.out.println(subscription);
-                request.setAttribute(CLEAR_PARAMETERS_ATTRIBUTE, true);
                 List<Subscription> subscriptionList = (List<Subscription>) request.getAttribute(SUBSCRIPTIONS_LIST_ATTRIBUTE);
 
-                subscriptionList = subscriptionList.stream()
-                        .map(p -> {
-                            if (subscription.getName().equals(p.getName())) {
-                                return subscription;
-                            } else {
-                                return p;
-                            }
-                        }).collect(Collectors.toList());
-                System.out.println(subscriptionList);
+                subscriptionList.removeIf(p -> subscription.getSubcriptionId() == p.getSubcriptionId());
+                subscriptionList.add(subscription);
+
+                request.setAttribute(CLEAR_PARAMETERS_ATTRIBUTE, true);
                 request.setAttribute(SUBSCRIPTIONS_LIST_ATTRIBUTE, subscriptionList);
 
             } else {
