@@ -9,6 +9,10 @@ public class Subscription {
     private int dayCount;
     private int trainingCount;
 
+    public Subscription() {
+
+    }
+
     public Subscription(int subcriptionId, String name, int guestVisit, int dayCount, int trainingCount) {
         this.subcriptionId = subcriptionId;
         this.name = name;

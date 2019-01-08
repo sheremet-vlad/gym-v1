@@ -17,7 +17,7 @@ public class FindClientByIdOrSurnameCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String query = String.valueOf(request.getParameter(QUERY_PARAMETER));
-        ClientService service = new ClientService();
+        ClientService service = ClientService.getInstance();
         Optional<List<Client>> optionalClients = service.findClientByCardNumberOrSurname(query);
         if (optionalClients.isPresent()) {
             List<Client> clients = optionalClients.get();

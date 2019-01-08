@@ -9,7 +9,6 @@
         <meta charset="UTF-8">
         <title>Главная страница</title>
         <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/styles/mainPage.css">
-<<<<<<< HEAD
         <script>
             function tableSearch() {
                 var phrase = document.getElementById('search');
@@ -31,8 +30,9 @@
                 }
             }
         </script>
-=======
+
         <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+
         <script>
             //----------------------------------------
             $(document).ready(function(){
@@ -50,196 +50,83 @@
             //-------------------------------------------
             $(document).ready(function(){
                 //Скрыть PopUp при загрузке страницы
-                PopUpHideEditAbon();
+                PopUpHideEditSubscription();
             });
             //Функция отображения PopUp
-            function PopUpShowEditAbon(){
-                $("#popupEditAbon").show();
+            function PopUpShowEditSubscription(){
+                $("#popupEditSubscription").show();
             }
             //Функция скрытия PopUp
-            function PopUpHideEditAbon(){
-                $("#popupEditAbon").hide();
+            function PopUpHideEditSubscription(){
+                $("#popupEditSubscription").hide();
             }
             /*--------------------------------------*/
             $(document).ready(function(){
                 //Скрыть PopUp при загрузке страницы
-                PopUpHideNewAbon();
+                PopUpHideNewSubscription();
             });
             //Функция отображения PopUp
-            function PopUpShowNewAbon(){
-                $("#popupNewAbon").show();
+            function PopUpShowNewSubscription(){
+                $("#popupNewSubscription").show();
             }
             //Функция скрытия PopUp
-            function PopUpHideNewAbon(){
-                $("#popupNewAbon").hide();
+            function PopUpHideNewSubscription(){
+                $("#popupNewSubscription").hide();
             }
             //----------------------------------------------
             $(document).ready(function(){
                 //Скрыть PopUp при загрузке страницы
-                PopUpHideaddNewClient();
+                PopUpHideAddNewClient();
             });
             //Функция отображения PopUp
-            function PopUpShowaddNewClient(){
-                $("#popupaddNewClient").show();
+            function PopUpShowAddNewClient(){
+                $("#popupAddNewClient").show();
             }
             //Функция скрытия PopUp
-            function PopUpHideaddNewClient(){
-                $("#popupaddNewClient").hide();
+            function PopUpHideAddNewClient(){
+                $("#popupAddNewClient").hide();
             }
             //------------------------------------------------
+
         </script>
     </head>
+
     <body>
         <form class="form-wrapper">
             <input name="surnameOrCardNumber" placeholder="Введите фамилию или номер карты" class="form-control"required="" type="text" id="search" onkeyup="tableSearch()">
         </form>
 
-        <div>
-            <a href="javascript:PopUpShowaddNewClient()">
-                <input value="Добавить нового клиента" class="addNewClient" id="addNewClient" type="submit">
-            </a>
-        </div>
-        <div class="b-popup-Statistic" id="popupaddNewClient">
-            <div class="b-popup-content">
-                <h2>Добавление нового клиента</h2>
-                <form name="MyForm" >
-                    <p>Имя</p>
-                    <input class="input" name="name" type="text"  />
-                    <p>Фамилия</p>
-                    <input class="input" name="surname" type="text" />
-                    <p>Отчество</p>
-                    <input class="input" name="middlename" type="text"  />
-                    <p>День рождения</p>
-                    <input class="input" name="birthday" type="text" />
-                    <p>Пол</p>
-                    <input class="input" name="gender" type="text"  />
-                    <p>Контактный телефон</p>
-                    <input class="input" name="phone" type="text" />
-                    <p>Комментарии</p>
-                    <textarea name="comments" type="text">
+        <c:if test="${not empty error}">
+            <div class="error">${error}</div>
+        </c:if>
+        <c:if test="${not empty message}">
+            <div class="message">${message}</div>
+        </c:if>
 
-                    </textarea>
-                    <p>
-                        <input id="create" value="Добавить" type="submit" />
-                        <a href="javascript:PopUpHideaddNewClient()">Back</a>
-                    </p>
-                </form>
+        <jsp:include page="newClient.jsp"/>
 
-            </div>
-        </div>
+        <jsp:include page="clientTable.jsp"/>
 
-        <div class="table-wrapper ">
-            <table class="table table-striped" id="info-table">
-                <thead>
-                <tr>
-                    <th>№</th>
-                    <th>ФИО</th>
-                    <th>№ Карты</th>
-                    <th>Инф. об абон.</th>
-                    <th>Пришёл</th>
-                    <th>Ушёл</th>
-                    <th>Инф-ция</th>
-                    <th>Доб. абонемент</th>
-                    <th>Статус</th>
-                </tr>
-                </thead>
-                <c:forEach var="client" items="${clients}">
-                    <tbody>
-
-                    <tr>
-                        <td>${client.id}</td>
-                        <td>${client.fio}</td>
-                        <td>${client.cardNumber}</td>
-                        <td>10.11.2018-28.11.2018(15)</td>
-                        <td>
-                            <div class="content">
-                                <button class="buttonInTable" id="come">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="content">
-                                <button class="buttonInTable" id="out">-</button>
-                            </div>
-                        <td>
-                            <div class="content">
-                                <button class="buttonInTable" id="clientInfo">...</button>
-                            </div>
-                        <td>
-                            <div class="content">
-                                <button class="buttonInTable" id="abonementAdd">Добавить</button>
-                            </div>
-                        </td>
-                        <td>${client.status}</td>
-                    </tr>
-                    </tbody>
-                </c:forEach>
-            </table>
-        </div>
         <div class="footer-container">
-            <div class="birthdayToDay">Сегодня день рождения</div>
-            <div class="containerNowInGym">
-                <div style="font: normal 30px Arial, Helvetica;">Сейчас в зале: </div>
-                <div style="height: 35px; width: 40px; border: 1px solid black; float: right"></div>
-            </div>
-            <div class="footer-table">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ФИО</th>
-                        <th>№ Карты</th>
-                        <th>Телефон</th>
-                    </tr>
-                    </thead>
-                    <c:forEach var="client" items="${clients}">
-                        <tbody>
-                        <tr>
-                            <td>${client.fio}</td>
-                            <td>${client.cardNumber}</td>
-                            <td>${client.phoneNumber}</td>
-                        </tr>
-                        </tbody>
-                    </c:forEach>
-                </table>
-            </div>
+            <jsp:include page="birthdayTable.jsp"/>
 
             <div class="b-container-Statistic">
                 <a href="javascript:PopUpShowStatistic()">
                     <input type="submit" name="command" value="Statistic" class="btnFooter"/>
                 </a>
             </div>
-            <div class="b-popup-Statistic" id="popupStatistic">
+            <div class="b-popup" id="popupStatistic">
                 <div class="b-popup-content">
-                    Text in Popup
+                    Text in Popup statistic
                     <a href="javascript:PopUpHideStatistic()">Back</a>
                 </div>
             </div>
 
-            <div class="b-container-Statistic">
-                <a href="javascript:PopUpShowEditAbon()">
-                    <button class="btnFooter" id="newAbonement">Новый абонемент</button>
-                </a>
-            </div>
-            <div class="b-popup-Statistic" id="popupNewAbon">
-                <div class="b-popup-content">
-                    Text in Popup
-                    <a href="javascript:PopUpHideEditAbon()">Back</a>
-                </div>
-            </div>
+            <jsp:include page="newSubscription.jsp"/>
 
-            <div>
-                <a href="javascript:PopUpShowEditAbon()">
-                    <button class="btnFooter" id="editAbonement">Редактировать абонемент</button>
-                </a>
-            </div>
-            <div class="b-popup-Statistic" id="popupEditAbon">
-                <div class="b-popup-content">
-                    Text in Popup
-                    <a href="javascript:PopUpHideEditAbon()">Back</a>
-                </div>
-            </div>
-
-
+            <jsp:include page="editSubscription.jsp"/>
 
         </div>
+
     </body>
 </html>

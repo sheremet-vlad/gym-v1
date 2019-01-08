@@ -16,7 +16,7 @@ public class Client {
     private StatusEnum status;
     private String comments;
     private Date birthday;
-    private int cardNumber;
+    private String cardNumber;
     private String fio;
 
     public Client() {
@@ -31,7 +31,7 @@ public class Client {
                   StatusEnum status,
                   String comments,
                   Date birthday,
-                  int cardNumber) {
+                  String cardNumber) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -116,11 +116,11 @@ public class Client {
         this.birthday = birthday;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(int cartNumber) {
+    public void setCardNumber(String cartNumber) {
         this.cardNumber = cartNumber;
     }
 
