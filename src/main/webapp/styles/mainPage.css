@@ -150,7 +150,6 @@
 
 table {
     table-layout: auto;
-    height: 600px;
     width: 1000px;
     word-wrap: break-word;
 }
@@ -281,10 +280,7 @@ td {
     border: 0;
 }
 
-/*---------------------------------------------------------------------------*/
-
-
-.b-popup-Statistic{
+.b-popup{
     width:100%;
     z-index: 999999;
     min-height:100%;
@@ -293,15 +289,44 @@ td {
     position:fixed;
     top:0px;
 }
-.b-popup-Statistic .b-popup-content{
+.b-popup-content-edit-subscription {
+    height: 360px;
+}
+.b-popup .b-popup-content{
     margin:40px auto 0px auto;
     width:500px;
-    height: 600px;
+    height: 680px;
     padding:10px;
     background-color: #c5c5c5;
     border-radius:5px;
     box-shadow: 0px 0px 10px #000;
 }
+
+.b-popup-client-info {
+    width:100%;
+    z-index: 999999;
+    min-height:100%;
+    overflow:hidden;
+    position:fixed;
+    top:0px;
+}
+
+.b-popup-client-info .b-popup-content-client-info {
+    margin:40px auto 0px auto;
+    width:500px;
+    height: 680px;
+    padding:10px;
+    background-color: #c5c5c5;
+    border-radius:5px;
+    box-shadow: 0px 0px 10px #000;
+}
+
+
+.b-popup-add-subscription .b-popup-content-subscription {
+    height: 320px;
+}
+
+
 
 
 #create {
@@ -330,7 +355,7 @@ td {
 }
 #respond input[type=text]:focus textarea{
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-    margin: 5px 1px 3px 0px;
+    margin: 5px 1px 3px 0;
     border: 1px solid rgba(81, 203, 238, 1);
 }
 
@@ -342,4 +367,34 @@ td {
 .b-popup-content input[type=text] {
     width: 200px;
     font-size: 14pt;
+}
+
+.error {
+    color: red;
+    font-size: 20px;
+}
+
+.message {
+    color: green;
+    font-size: 20px;
+}
+
+.training-count {
+    display: inline;
+}
+
+.radio-training-count {
+    border-left: 2px solid black;
+}
+
+.button-add {
+    margin: 30px 10px 0 0;
+}
+
+.hidden-button {
+    display: none;
+}
+
+.installHeight {
+    height: 400px;
 }
