@@ -2,8 +2,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <div class="table-wrapper ">
+    <form method="post">
     <table class="table table-striped" id="info-table">
         <thead>
+
         <tr>
             <th>№</th>
             <th>ФИО</th>
@@ -16,7 +18,7 @@
             <th>Статус</th>
         </tr>
         </thead>
-        <c:forEach var="client" items="${clients}">
+        <c:forEach var="client" items="${clients}" varStatus="index">
             <tbody>
 
             <tr>
@@ -36,11 +38,22 @@
                 <td>
                     <jsp:include page="clientInfo.jsp"/>
                 <td>
-                    <jsp:include page="addSubscriptionClient.jsp"/>
+                    <div class="b-container-newSubscription">
+                        <a href="javascript:PopUpShowAddSubscriptionClient(${client.id})">
+                            <button class="buttonInTable" name="command" id="subscriptionAdd" value="button${client.id}" >Добавить</button>
+                        </a>
+                    </div>
                 </td>
                 <td>${client.status}</td>
             </tr>
             </tbody>
         </c:forEach>
+
     </table>
+    </form>
+    <script>
+        function getClientID(clientId) {
+            document.getElementById('current-client-id').value = clientId;
+        }
+    </script>
 </div>

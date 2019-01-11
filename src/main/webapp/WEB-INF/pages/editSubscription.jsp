@@ -14,14 +14,9 @@
         }
     </script>
 </c:if>
-<<<<<<< HEAD
-<div class="b-popup b-popup-edit-subscription" id="popupEditSubscription">
-    <div class="b-popup-content b-popup-content-subscription" style="height: 360px">
-=======
 
 <div class="b-popup" id="popupEditSubscription">
-    <div class="b-popup-content b-popup-content-edit-subscription">
->>>>>>> ed8f9b637bf396d9157a10202becca8fa74d3c30
+    <div class="b-popup-content b-popup-content-edit-subscription" style="height: 360px">
         <h2>Добавление нового абонемента</h2>
 
         <form method="post">
