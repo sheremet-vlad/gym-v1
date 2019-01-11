@@ -53,8 +53,7 @@ public class SubscriptionDao implements Dao{
 
     public Optional<List<Subscription>> findSubscriptionByName(String name) throws DaoException{
         String queryFindSubscription = "SELECT * FROM subscriptions WHERE `name`='var'";
-        System.out.println(queryFindSubscription);
-        System.out.println(name);
+
         queryFindSubscription = queryFindSubscription.replaceFirst(REPLACE_REGEX, name);
 
         Optional<List<Subscription>> optionalSubscriptions = getSubscriptions(queryFindSubscription);

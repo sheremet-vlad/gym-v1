@@ -289,6 +289,9 @@ td {
     position:fixed;
     top:0px;
 }
+.b-popup-content-edit-subscription {
+    height: 360px;
+}
 .b-popup .b-popup-content{
     margin:40px auto 0px auto;
     width:500px;
@@ -322,6 +325,8 @@ td {
 .b-popup-add-subscription .b-popup-content-subscription {
     height: 320px;
 }
+
+
 
 
 #create {
@@ -384,10 +389,6 @@ td {
 
 .button-add {
     margin: 30px 10px 0 0;
-}
-
-.b-container-editSubscription {
-    height: 700px;
 }
 
 .hidden-button {
