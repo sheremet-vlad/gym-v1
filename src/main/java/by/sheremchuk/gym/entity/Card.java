@@ -11,6 +11,10 @@ public class Card {
     private int trainingCount;
     private int guestCount;
 
+    public Card() {
+
+    }
+
     public Card(int clientID, int subscriptionId, Date startDate, Date endDate, int trainingCount, int guestCount) {
         this.clientID = clientID;
         this.subscriptionId = subscriptionId;

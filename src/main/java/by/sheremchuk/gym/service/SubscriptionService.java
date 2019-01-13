@@ -1,6 +1,8 @@
 package by.sheremchuk.gym.service;
 
+import by.sheremchuk.gym.dao.ClientDao;
 import by.sheremchuk.gym.dao.SubscriptionDao;
+import by.sheremchuk.gym.entity.Client;
 import by.sheremchuk.gym.entity.Subscription;
 import by.sheremchuk.gym.exception.ServiceException;
 

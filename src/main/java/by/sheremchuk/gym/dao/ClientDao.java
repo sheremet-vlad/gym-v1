@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ClientDao implements Dao {
-        private final static String REPLACE_REGEX = "var";
+    private final static String REPLACE_REGEX = "var";
 
     private final static String DATE_REGEX = "yyyy-MM-dd";
 
@@ -46,6 +46,11 @@ public class ClientDao implements Dao {
     public Optional<List<Client>> findClientBySurname(String surname)  throws DaoException{
         String queryFindClientBySurname = "SELECT * FROM clients WHERE surname = '" + surname + "'";
         return getClient(queryFindClientBySurname);
+    }
+
+    public Optional<List<Client>> findClientById(int id) throws DaoException {
+        String queryFIndClientById = "SELECT * FROM clients WHERE `clients_id`='var'";
+        return getClient(queryFIndClientById);
     }
     public Optional<List<Client>> findAllClient()  throws DaoException{
         String queryFindAllClients = "SELECT * FROM clients";

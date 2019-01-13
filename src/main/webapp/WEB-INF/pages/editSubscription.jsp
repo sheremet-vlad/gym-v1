@@ -17,7 +17,7 @@
 
 <div class="b-popup" id="popupEditSubscription">
     <div class="b-popup-content b-popup-content-edit-subscription" style="height: 360px">
-        <h2>Добавление нового абонемента</h2>
+        <h2>Редактирование абонемента</h2>
 
         <form method="post">
             <input type="submit" class="hidden-button" id="buttonLoadSubscriptionInfo" name="command"
@@ -49,7 +49,7 @@
                     </label>
                 </p>
             </div>
-
+            <br><br>
             <p>
                 <button class="button-edit" name="command" value="editSubscriptionCommand">Изменить</button>
                 <a href="javascript:CloseEditSubscription()">Back</a>

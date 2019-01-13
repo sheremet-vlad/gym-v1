@@ -110,21 +110,12 @@
                 PopUpHideAddSubscriptionClient();
             });
             //Функция отображения PopUp
-            function PopUpShowAddSubscriptionClient(buttonId){
-                getClientID(buttonId)
-                $("#popupAddSubscriptionClient").show();
-            }
-            //Функция скрытия PopUp
-            function PopUpHideAddSubscriptionClient(){
-                $("#popupAddSubscriptionClient").hide();
-            }
+
             //----------------------------------------------
         </script>
     </head>
 
     <body>
-        <input type="hidden" name="command" id="current-button-id">
-
         <form class="form-wrapper">
             <input name="surnameOrCardNumber" placeholder="Введите фамилию или номер карты" class="form-control"required="" type="text" id="search" onkeyup="tableSearch()">
         </form>
@@ -164,5 +155,19 @@
             <jsp:include page="popUpAddSubscriptionClient.jsp"/>
 
         </div>
+
+    <script>
+        function PopUpShowAddSubscriptionClient(buttonId){
+            SetClientID(buttonId);
+            $("#popupAddSubscriptionClient").show();
+        }
+        //Функция скрытия PopUp
+        function PopUpHideAddSubscriptionClient(){
+            $("#popupAddSubscriptionClient").hide();
+        }
+        function SetClientID(clientId) {
+            document.getElementById("client-id-to-add-subscription").value = clientId;
+        }
+    </script>
     </body>
 </html>
