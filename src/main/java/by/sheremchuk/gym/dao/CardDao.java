@@ -91,7 +91,6 @@ public class CardDao implements Dao {
         query = query.replaceFirst(REPLACE_REGEX, String.valueOf(card.getClientID()));
         query = query.replaceFirst(REPLACE_REGEX, String.valueOf(card.getSubscriptionId()));
         query = query.replaceFirst(REPLACE_REGEX, String.valueOf(card.getGuestCount()));
-        query = query.replaceFirst(REPLACE_REGEX, card.getStatus().getValue());
         query = query.replaceFirst(REPLACE_REGEX, card.getSubscriptionName());
 
         int result;
