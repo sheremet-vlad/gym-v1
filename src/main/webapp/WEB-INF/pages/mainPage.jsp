@@ -168,6 +168,9 @@
         function SetClientID(clientId) {
             document.getElementById("client-id-to-add-subscription").value = clientId;
         }
+        function SetCurrentClientID(clientId) {
+            document.getElementById("current-button-id").value = clientId;
+        }
     </script>
     </body>
 </html>

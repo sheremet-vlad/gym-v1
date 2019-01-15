@@ -3,32 +3,32 @@
 
 <div class="table-wrapper ">
     <form method="post">
-        <input type="hidden" name="current-client" id="current-button-id"/>
         <table class="table table-striped" id="info-table">
             <thead>
-
             <tr>
                 <th>№</th>
                 <th>ФИО</th>
-                <th>№ Карты</th>
+                <th>Карта</th>
+                <th>Тек. абон.</th>
                 <th>Инф. об абон.</th>
-                <th>Пришёл</th>
-                <th>Ушёл</th>
+                <th>+</th>
+                <th>-</th>
                 <th>Инф-ция</th>
-                <th>Доб. абонемент</th>
+                <th>Доб. абон.</th>
                 <th>Статус</th>
             </tr>
             </thead>
             <c:forEach var="client" items="${clients}" varStatus="index">
                 <tbody>
-
                 <tr>
                     <td>${client.id}</td>
                     <td>${client.fio}</td>
                     <td>${client.cardNumber}</td>
-                    <td>10.11.2018-28.11.2018(15)</td>
+                    <td>${client.card == null ? "--" : client.card.subscriptionName}</td>
+                    <td>${client.card == null ? "--" : client.card.startDate != null ?
+                        client.card.cardInfo : "не активен"}</td>
                     <td>
-                        <input value="+" class="buttonInTable" id="come" type="submit">
+                        <button class="buttonInTable" name="command" value="startTraining|${client.id}">+</button>
                     </td>
                     <td>
                         <input value="-" class="buttonInTable" id="out" type="submit">

@@ -7,6 +7,8 @@ public class CommandFactory {
     private static final String LOAD_SUBSCRIPTION_INFO_IN_EDIT= "loadSubscriptionInfoInEdit";
     private static final String EDIT_SUBSCRIPTION = "editSubscriptionCommand";
     private static final String ADD_SUBSCRIPTION_TO_CLIENT = "addSubscriptionClient";
+    private static final String START_TRAINING = "startTraining";
+    private static final String REGEX_START_TRAINING = "startTraining\\|\\d+";
 
     private static volatile CommandFactory instance;
     private final static Object lock = new Object();
@@ -29,7 +31,7 @@ public class CommandFactory {
 
     public Command create(String commandName) {
 
-        Command command = null;
+        Command command;
 
         switch (commandName) {
             case FIND_CLIENT_BY_CARD_NUMBER_OR_SURNAME: {
@@ -56,8 +58,16 @@ public class CommandFactory {
                 command = new AddSubscriptionToClientCommand();
             }
             break;
+            case START_TRAINING: {
+                command = new StartTrainingCommand();
+            }
+            break;
             default: {
-                command = new EmptyCommand();
+                if (commandName.matches(REGEX_START_TRAINING)) {
+                    command = new StartTrainingCommand();
+                } else {
+                    command = new EmptyCommand();
+                }
             }
             break;
         }

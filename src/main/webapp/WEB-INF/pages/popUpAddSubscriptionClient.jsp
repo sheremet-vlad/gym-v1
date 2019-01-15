@@ -8,7 +8,7 @@
             <select id="editSelect" size="1" name="subscriptionAddToClientName">
                 <option value="-1">Выберите абонемент</option>
                 <c:forEach var="subscription" items="${subscriptions}">
-                    <option value="${subscription.subcriptionId}">
+                    <option value="${subscription.name}">
                             ${subscription.name}
                     </option>
                 </c:forEach>

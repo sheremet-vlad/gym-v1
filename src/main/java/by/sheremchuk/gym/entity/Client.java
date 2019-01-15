@@ -18,6 +18,7 @@ public class Client {
     private Date birthday;
     private String cardNumber;
     private String fio;
+    private Card card;
 
     public Client() {
     }
@@ -31,7 +32,8 @@ public class Client {
                   StatusEnum status,
                   String comments,
                   Date birthday,
-                  String cardNumber) {
+                  String cardNumber,
+                  Card card) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -42,6 +44,7 @@ public class Client {
         this.comments = comments;
         this.birthday = birthday;
         this.cardNumber = cardNumber;
+        this.card = card;
     }
 
     public int getId() {
@@ -132,6 +135,14 @@ public class Client {
         this.fio = fio;
     }
 
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -168,7 +179,7 @@ public class Client {
                 ", comments='" + comments + '\'' +
                 ", birthday=" + birthday +
                 ", cardNumber=" + cardNumber +
-                ", fio='" + fio + '\'' +
+                ", card='" + card.hashCode() + '\'' +
                 '}';
     }
 }

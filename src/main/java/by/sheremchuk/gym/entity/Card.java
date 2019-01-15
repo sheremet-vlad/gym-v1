@@ -1,27 +1,58 @@
 package by.sheremchuk.gym.entity;
 
+import by.sheremchuk.gym.entity.enums.CardStatusEnum;
+
 import java.util.Date;
 import java.util.Objects;
 
 public class Card {
+    private int id;
     private int clientID;
     private int subscriptionId;
     private Date startDate;
     private Date endDate;
     private int trainingCount;
     private int guestCount;
+    private String subscriptionName;
+    private CardStatusEnum status;
+    private String cardInfo;
 
     public Card() {
 
     }
 
-    public Card(int clientID, int subscriptionId, Date startDate, Date endDate, int trainingCount, int guestCount) {
+    public Card(int clientID, int subscriptionId, Date startDate, Date endDate, int trainingCount, int guestCount, String subscriptionName) {
         this.clientID = clientID;
         this.subscriptionId = subscriptionId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.trainingCount = trainingCount;
         this.guestCount = guestCount;
+        this.subscriptionName = subscriptionName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public CardStatusEnum getStatus() {
+        return status;
+    }
+
+    public String getCardInfo() {
+        return cardInfo;
+    }
+
+    public void setCardInfo(String cardInfo) {
+        this.cardInfo = cardInfo;
+    }
+
+    public void setStatus(CardStatusEnum status) {
+        this.status = status;
     }
 
     public int getClientID() {
@@ -72,6 +103,14 @@ public class Card {
         this.guestCount = guestCount;
     }
 
+    public String getSubscriptionName() {
+        return subscriptionName;
+    }
+
+    public void setSubscriptionName(String subscriptionName) {
+        this.subscriptionName = subscriptionName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,12 +121,13 @@ public class Card {
                 trainingCount == card.trainingCount &&
                 guestCount == card.guestCount &&
                 Objects.equals(startDate, card.startDate) &&
-                Objects.equals(endDate, card.endDate);
+                Objects.equals(endDate, card.endDate) &&
+                Objects.equals(subscriptionName, card.subscriptionName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientID, subscriptionId, startDate, endDate, trainingCount, guestCount);
+        return Objects.hash(clientID, subscriptionId, startDate, endDate, trainingCount, guestCount, subscriptionName);
     }
 
     @Override
@@ -99,6 +139,8 @@ public class Card {
                 ", endDate=" + endDate +
                 ", trainingCount=" + trainingCount +
                 ", guestCount=" + guestCount +
+                ", subscriptionName=" + subscriptionName +
+                ", hash=" + this.hashCode() +
                 '}';
     }
 }

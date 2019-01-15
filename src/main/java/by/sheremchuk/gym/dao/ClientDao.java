@@ -49,7 +49,8 @@ public class ClientDao implements Dao {
     }
 
     public Optional<List<Client>> findClientById(int id) throws DaoException {
-        String queryFIndClientById = "SELECT * FROM clients WHERE `clients_id`='var'";
+        String queryFIndClientById = "SELECT * FROM clients WHERE clients_id = 'var'";
+        queryFIndClientById = queryFIndClientById.replaceFirst(REPLACE_REGEX, String.valueOf(id));
         return getClient(queryFIndClientById);
     }
     public Optional<List<Client>> findAllClient()  throws DaoException{

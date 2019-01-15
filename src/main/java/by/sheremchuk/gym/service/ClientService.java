@@ -6,6 +6,7 @@ import by.sheremchuk.gym.entity.enums.GenderEnum;
 import by.sheremchuk.gym.entity.enums.StatusEnum;
 import by.sheremchuk.gym.exception.ServiceException;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -32,9 +33,16 @@ public class ClientService {
         return instance;
     }
 
-    public Optional<List<Client>> findAllClients() throws ServiceException {
+    public List<Client> findAllClients() throws ServiceException {
         ClientDao clientDao = ClientDao.getInstance();
-        return clientDao.findAllClient();
+        Optional<List<Client>> optionalClients = clientDao.findAllClient();
+
+        List<Client> clients = optionalClients.orElseGet(ArrayList::new);
+
+        CardService cardService = CardService.getInstance();
+        cardService.loadCardToClients(clients);
+
+        return clients;
     }
 
     public Optional<List<Client>> findClientByCardNumberOrSurname(String query) throws ServiceException {

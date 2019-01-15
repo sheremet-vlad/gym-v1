@@ -5,6 +5,7 @@ import by.sheremchuk.gym.command.CommandFactory;
 import by.sheremchuk.gym.entity.Client;
 import by.sheremchuk.gym.entity.Subscription;
 import by.sheremchuk.gym.exception.ServiceException;
+import by.sheremchuk.gym.service.CardService;
 import by.sheremchuk.gym.service.ClientService;
 import by.sheremchuk.gym.service.SubscriptionService;
 
@@ -17,12 +18,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.sheremchuk.gym.variable.AttributeName.CLEAR_PARAMETERS_ATTRIBUTE;
+import static by.sheremchuk.gym.variable.AttributeName.CLIENTS_LIST_ATTRIBUTE;
+import static by.sheremchuk.gym.variable.AttributeName.COMMAND_PARAMETER;
 import static by.sheremchuk.gym.variable.AttributeName.SUBSCRIPTIONS_LIST_ATTRIBUTE;
 
 public class MainPageServlet extends HttpServlet {
-    private final static String CLEAR_PARAMETERS_ATTRIBUTE = "isClearParameter";
 
-    private final static String COMMAND_PARAMETER = "command";
     private List<Client> clientList;
     private List<Subscription> subscriptionList;
     private CommandFactory commandFactory;
@@ -35,7 +37,7 @@ public class MainPageServlet extends HttpServlet {
         SubscriptionService subscriptionService = SubscriptionService.getInstance();
 
         try {
-            clientList = clientService.findAllClients().orElse(new ArrayList<>());
+            clientList = clientService.findAllClients();
             subscriptionList = subscriptionService.findAllSubscriptions().orElse(new ArrayList<>());
         } catch (ServiceException e) {
             throw new ServletException(e.getMessage());
@@ -45,18 +47,16 @@ public class MainPageServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page = "/WEB-INF/pages/mainPage.jsp";
-        request.setAttribute("clients", clientList);
+        request.setAttribute(CLIENTS_LIST_ATTRIBUTE, clientList);
         request.setAttribute(SUBSCRIPTIONS_LIST_ATTRIBUTE, subscriptionList);
         request.setAttribute(CLEAR_PARAMETERS_ATTRIBUTE, false);
 
         response.setCharacterEncoding("UTF-8");
-
         String command = request.getParameter(COMMAND_PARAMETER);
         if (command == null) {
             command = "";
         }
         Command action = commandFactory.create(command);
-
         try {
             action.execute(request, response);
         } catch (ServiceException e) {
