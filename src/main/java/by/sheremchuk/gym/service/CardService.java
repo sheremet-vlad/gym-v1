@@ -7,15 +7,21 @@ import by.sheremchuk.gym.entity.Card;
 import by.sheremchuk.gym.entity.Client;
 import by.sheremchuk.gym.entity.Subscription;
 import by.sheremchuk.gym.entity.enums.CardStatusEnum;
+import by.sheremchuk.gym.entity.enums.StatusEnum;
 import by.sheremchuk.gym.exception.DaoException;
 import by.sheremchuk.gym.exception.ServiceException;
+import by.sheremchuk.gym.variable.GlobalVariable;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import static by.sheremchuk.gym.variable.AttributeName.UNLIM_TRAINING_COUNT;
 
 public class CardService {
     private final static String DATE_REGEX_TO_CARD = "dd:MM:yyyy";
@@ -90,11 +96,29 @@ public class CardService {
         Card card = client.getCard();
 
         if (card.getStatus().equals(CardStatusEnum.NOT_ACTIVE)) {
-            activeCard(card);
+            activateCard(card);
+        } else {
+            int trainingCount = card.getTrainingCount();
+            if (trainingCount != UNLIM_TRAINING_COUNT) {
+                card.setTrainingCount(--trainingCount);
+            }
+            try {
+                CardDao cardDao = CardDao.getInstance();
+                cardDao.addTrainingToDB(new Date(), client, card);
+
+                String newCardInfo = card.getCardInfo().substring(0, card.getCardInfo().indexOf("(") + 1);
+                newCardInfo = newCardInfo + trainingCount + ")";
+                card.setCardInfo(newCardInfo);
+                client.setStatus(StatusEnum.IN);
+                ++GlobalVariable.countOfPeopleInGym;
+            } catch (DaoException e) {
+                throw new ServiceException(e.getMessage());
+            }
         }
+
     }
 
-    private void activeCard(Card card) throws DaoException {
+    private void activateCard(Card card) throws DaoException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_REGEX_TO_CARD);
         card.setStatus(CardStatusEnum.ACTIVE);
         Date currentDate = new Date();
@@ -120,8 +144,38 @@ public class CardService {
         cardDao.updateActivationCardByIndex(card);
     }
 
+    public void endTraining(Client client) throws ServiceException {
+        Card card = client.getCard();
+        CardDao cardDao = CardDao.getInstance();
+        try {
+            if (isCardActive(card)) {
+                cardDao.addEndTrainingToDB(new Date(), client, card);
+            } else {
+                client.setCard(cardDao.addEndTrainingAndDeactivateCardToDB(new Date(), client, card));
+            }
+            --GlobalVariable.countOfPeopleInGym;
+            client.setStatus(StatusEnum.OUT);
+        } catch (DaoException e) {
+            e.printStackTrace();
+            throw new ServiceException(e.getMessage());
+        }
+
+    }
+
+    private boolean isCardActive(Card card) {
+        Date date = card.getEndDate();
+        LocalDate endDate = new Timestamp(date.getTime()).toLocalDateTime().toLocalDate();
+        LocalDate localDate = LocalDate.now();
+
+        boolean isDataActive = !localDate.isAfter(endDate);
+        boolean isLostTraining = card.getTrainingCount() != 0;
+
+        return isDataActive && isLostTraining;
+    }
+
     public void loadCardToClients(List<Client> clients) throws ServiceException {
         CardDao cardDao = CardDao.getInstance();
+        cardDao.deactiveCards();
         cardDao.loadCardsToClients(clients);
     }
 }

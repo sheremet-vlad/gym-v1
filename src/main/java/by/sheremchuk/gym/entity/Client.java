@@ -179,7 +179,6 @@ public class Client {
                 ", comments='" + comments + '\'' +
                 ", birthday=" + birthday +
                 ", cardNumber=" + cardNumber +
-                ", card='" + card.hashCode() + '\'' +
                 '}';
     }
 }

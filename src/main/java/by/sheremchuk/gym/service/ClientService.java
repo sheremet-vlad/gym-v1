@@ -4,6 +4,7 @@ import by.sheremchuk.gym.dao.ClientDao;
 import by.sheremchuk.gym.entity.Client;
 import by.sheremchuk.gym.entity.enums.GenderEnum;
 import by.sheremchuk.gym.entity.enums.StatusEnum;
+import by.sheremchuk.gym.exception.DaoException;
 import by.sheremchuk.gym.exception.ServiceException;
 
 import java.util.ArrayList;
@@ -61,6 +62,11 @@ public class ClientService {
         return string.matches(REGEX_ALL_DIGITS);
     }
 
+    public Optional<List<Client>> findClientsWithBirthdayToday() throws DaoException {
+        ClientDao clientDao = ClientDao.getInstance();
+
+        return clientDao.findClientByBirthdayToday();
+    }
     public Optional<Client> addClient(String name,
                                       String surname,
                                       String middleName,

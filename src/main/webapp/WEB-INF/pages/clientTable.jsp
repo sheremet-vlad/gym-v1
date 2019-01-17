@@ -31,7 +31,7 @@
                         <button class="buttonInTable" name="command" value="startTraining|${client.id}">+</button>
                     </td>
                     <td>
-                        <input value="-" class="buttonInTable" id="out" type="submit">
+                        <button class="buttonInTable" name="command" value="endTraining|${client.id}">-</button>
                     <td>
                             <jsp:include page="clientInfo.jsp"/>
                     <td>
@@ -39,7 +39,7 @@
                             Добавить
                         </a>
                     </td>
-                    <td>${client.status}</td>
+                    <td>${client.status == "IN" ? "В зале" : ""}</td>
                 </tr>
                 </tbody>
             </c:forEach>

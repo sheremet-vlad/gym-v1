@@ -7,8 +7,11 @@ public class AttributeName {
     public final static String EDIT_GUESTS_VISIT_ATTRIBUTE = "subGuestsVisitsEdit";
     public final static String EDIT_TRAINING_COUNT_ATTRIBUTE = "subTrainingCountEdit";
     public final static String UNLIM_ATTRIBUTE = "subTrainingUnlimEdit";
+
     public final static String SUBSCRIPTIONS_LIST_ATTRIBUTE = "subscriptions";
     public final static String CLIENTS_LIST_ATTRIBUTE = "clients";
+    public final static String CLIENTS_WITH_BIRTHDAY_TODAY = "birthdayClients";
+    public final static String COUNT_OF_PEOPLE_IN_GYM = "peopleCountInGym";
 
     public final static int UNLIM_TRAINING_COUNT = 88;
 

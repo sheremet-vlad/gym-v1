@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ public class CardDao implements Dao {
     private final static String REPLACE_REGEX = "var";
     private final static String DATE_REGEX_TO_DB = "yyyy-MM-dd";
     private final static String DATE_REGEX_TO_CARD = "dd:MM:yyyy";
+    private final static String DATE_REGEX_TO_TIMESTAMP = "yyyy-MM-dd HH:mm:ss";
 
     private static volatile CardDao instance;
     private final static Object lock = new Object();
@@ -106,6 +108,94 @@ public class CardDao implements Dao {
         return result;
     }
 
+    public void addEndTrainingToDB(Date endDate, Client client, Card card) throws DaoException {
+        String queryForUpdateClient = "UPDATE clients SET `status` = 'out' WHERE `clients_id` = 'var'";
+        queryForUpdateClient = queryForUpdateClient.replaceFirst(REPLACE_REGEX, String.valueOf(client.getId()));
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_REGEX_TO_TIMESTAMP);
+        String queryForTrainingHistory = "UPDATE trainy_history SET `date_end` = 'var' " +
+                "WHERE `clients_id` = 'var' and `subscriptions_id` = 'var' and `date_end` IS NULL";
+        queryForTrainingHistory = queryForTrainingHistory.replaceFirst(REPLACE_REGEX, simpleDateFormat.format(endDate));
+        queryForTrainingHistory = queryForTrainingHistory.replaceFirst(REPLACE_REGEX, String.valueOf(card.getClientID()));
+        queryForTrainingHistory = queryForTrainingHistory.replaceFirst(REPLACE_REGEX, String.valueOf(card.getSubscriptionId()));
+
+        try {
+            Statement statement = ConnectorDB.getConnection().createStatement();
+            statement.executeUpdate(queryForUpdateClient);
+            statement.executeUpdate(queryForTrainingHistory);
+
+            System.out.println(queryForUpdateClient);
+            System.out.println(queryForTrainingHistory);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DaoException("ошибка при записи завершения тренировки");
+        }
+
+    }
+
+    public void addTrainingToDB(Date startDate, Client client, Card card) throws DaoException {
+        String queryForUpdateClient = "UPDATE clients SET `status` = 'in' WHERE `clients_id` = 'var'";
+        queryForUpdateClient = queryForUpdateClient.replaceFirst(REPLACE_REGEX, String.valueOf(client.getId()));
+
+        String queryForUpdateCard = "UPDATE card SET `training_count` = 'var' WHERE `card_id` = 'var'";
+        queryForUpdateCard = queryForUpdateCard.replaceFirst(REPLACE_REGEX, String.valueOf(card.getTrainingCount()));
+        queryForUpdateCard = queryForUpdateCard.replaceFirst(REPLACE_REGEX, String.valueOf(card.getId()));
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_REGEX_TO_TIMESTAMP);
+        String queryForTrainingHistory = "INSERT INTO trainy_history (`clients_id`, `subscriptions_id`, `date_start`) " +
+                "VALUES ('var', 'var', 'var')";
+        queryForTrainingHistory = queryForTrainingHistory.replaceFirst(REPLACE_REGEX, String.valueOf(card.getClientID()));
+        queryForTrainingHistory = queryForTrainingHistory.replaceFirst(REPLACE_REGEX, String.valueOf(card.getSubscriptionId()));
+        queryForTrainingHistory = queryForTrainingHistory.replaceFirst(REPLACE_REGEX, simpleDateFormat.format(startDate));
+
+        try {
+            Statement statement = ConnectorDB.getConnection().createStatement();
+
+            statement.executeUpdate(queryForUpdateClient);
+            statement.executeUpdate(queryForUpdateCard);
+            statement.executeUpdate(queryForTrainingHistory);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DaoException("ошибка в базе данных при добавлении тренировки");
+        }
+    }
+
+    public Card addEndTrainingAndDeactivateCardToDB(Date endDate, Client client, Card card) throws DaoException {
+        String queryForUpdateClient = "UPDATE clients SET `status` = 'in' WHERE `clients_id` = 'var'";
+        queryForUpdateClient = queryForUpdateClient.replaceFirst(REPLACE_REGEX, String.valueOf(client.getId()));
+
+        String queryForUpdateCard = "UPDATE card SET `status` = 'var' WHERE `card_id` = 'var'";
+        queryForUpdateCard = queryForUpdateCard.replaceFirst(REPLACE_REGEX, CardStatusEnum.END.getValue());
+        queryForUpdateCard = queryForUpdateCard.replaceFirst(REPLACE_REGEX, String.valueOf(card.getId()));
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_REGEX_TO_TIMESTAMP);
+        String queryForTrainingHistory = "UPDATE trainy_history SET `date_end` = 'var' " +
+                "WHERE `clients_id` = 'var' and `subscriptions_id` = 'var' and `date_end` IS NULL";
+        queryForTrainingHistory = queryForTrainingHistory.replaceFirst(REPLACE_REGEX, simpleDateFormat.format(endDate));
+        queryForTrainingHistory = queryForTrainingHistory.replaceFirst(REPLACE_REGEX, String.valueOf(card.getClientID()));
+        queryForTrainingHistory = queryForTrainingHistory.replaceFirst(REPLACE_REGEX, String.valueOf(card.getSubscriptionId()));
+
+        String queryToGetActiveCard = "SELECT * FROM `card` WHERE `clients_id` = 'var' and `status` != 'end' LIMIT 1";
+        queryToGetActiveCard = queryToGetActiveCard.replaceFirst(REPLACE_REGEX, String.valueOf(client.getId()));
+
+        Card newCard;
+        try {
+            Statement statement = ConnectorDB.getConnection().createStatement();
+
+            statement.executeUpdate(queryForUpdateClient);
+            statement.executeUpdate(queryForUpdateCard);
+            statement.executeUpdate(queryForTrainingHistory);
+            ResultSet resultSet = statement.executeQuery(queryToGetActiveCard);
+
+            newCard = resultSet.next() ? createCard(resultSet) : null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DaoException("ошибка в базе данных при добавлении тренировки");
+        }
+
+        return newCard;
+    }
+
     public void updateActivationCardByIndex(Card card) throws DaoException {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_REGEX_TO_DB);
 
@@ -114,7 +204,6 @@ public class CardDao implements Dao {
         query = query.replaceFirst(REPLACE_REGEX, dateFormat.format(card.getEndDate()));
         query = query.replaceFirst(REPLACE_REGEX, card.getStatus().getValue());
         query = query.replaceFirst(REPLACE_REGEX, String.valueOf(card.getId()));
-        System.out.println(card.getId());
 
         try {
             Statement statement = ConnectorDB.getConnection().createStatement();
@@ -127,6 +216,20 @@ public class CardDao implements Dao {
         }
     }
 
+    public void deactiveCards() throws DaoException {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_REGEX_TO_DB);
+            String queryForGetCard = "UPDATE card SET status = 'end' WHERE end_date < 'var'";
+            queryForGetCard = queryForGetCard.replaceFirst(REPLACE_REGEX, simpleDateFormat.format(new Date()));
+
+            Statement statement = ConnectorDB.getConnection().createStatement();
+            statement.executeUpdate(queryForGetCard);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DaoException();
+        }
+    }
+
     private Card createCard(ResultSet resultSet) throws SQLException {
         Card card = new Card();
 
@@ -135,6 +238,7 @@ public class CardDao implements Dao {
         card.setStatus(CardStatusEnum.fromString(resultSet.getString("status")));
         card.setTrainingCount(resultSet.getInt("training_count"));
         card.setGuestCount(resultSet.getInt("guest_count"));
+        card.setSubscriptionId(resultSet.getInt("subscriptions_id"));
         card.setSubscriptionName(resultSet.getString("subsription_name"));
 
         if (card.getStatus().equals(CardStatusEnum.ACTIVE)) {

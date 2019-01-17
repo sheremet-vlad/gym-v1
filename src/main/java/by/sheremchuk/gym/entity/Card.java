@@ -133,6 +133,7 @@ public class Card {
     @Override
     public String toString() {
         return "Card{" +
+                "cardId" + id +
                 "clientID=" + clientID +
                 ", subscriptionId=" + subscriptionId +
                 ", startDate=" + startDate +

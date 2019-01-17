@@ -9,6 +9,7 @@ public class CommandFactory {
     private static final String ADD_SUBSCRIPTION_TO_CLIENT = "addSubscriptionClient";
     private static final String START_TRAINING = "startTraining";
     private static final String REGEX_START_TRAINING = "startTraining\\|\\d+";
+    private static final String REGEX_END_TRAINING = "endTraining\\|\\d+";
 
     private static volatile CommandFactory instance;
     private final static Object lock = new Object();
@@ -65,6 +66,8 @@ public class CommandFactory {
             default: {
                 if (commandName.matches(REGEX_START_TRAINING)) {
                     command = new StartTrainingCommand();
+                } else if (commandName.matches(REGEX_END_TRAINING)) {
+                    command = new EndTrainingCommand();
                 } else {
                     command = new EmptyCommand();
                 }

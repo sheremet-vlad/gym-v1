@@ -4,8 +4,8 @@ import by.sheremchuk.gym.command.Command;
 import by.sheremchuk.gym.command.CommandFactory;
 import by.sheremchuk.gym.entity.Client;
 import by.sheremchuk.gym.entity.Subscription;
+import by.sheremchuk.gym.entity.enums.StatusEnum;
 import by.sheremchuk.gym.exception.ServiceException;
-import by.sheremchuk.gym.service.CardService;
 import by.sheremchuk.gym.service.ClientService;
 import by.sheremchuk.gym.service.SubscriptionService;
 
@@ -20,14 +20,18 @@ import java.util.List;
 
 import static by.sheremchuk.gym.variable.AttributeName.CLEAR_PARAMETERS_ATTRIBUTE;
 import static by.sheremchuk.gym.variable.AttributeName.CLIENTS_LIST_ATTRIBUTE;
+import static by.sheremchuk.gym.variable.AttributeName.CLIENTS_WITH_BIRTHDAY_TODAY;
 import static by.sheremchuk.gym.variable.AttributeName.COMMAND_PARAMETER;
+import static by.sheremchuk.gym.variable.AttributeName.COUNT_OF_PEOPLE_IN_GYM;
 import static by.sheremchuk.gym.variable.AttributeName.SUBSCRIPTIONS_LIST_ATTRIBUTE;
+import static by.sheremchuk.gym.variable.GlobalVariable.countOfPeopleInGym;
 
 public class MainPageServlet extends HttpServlet {
 
     private List<Client> clientList;
     private List<Subscription> subscriptionList;
     private CommandFactory commandFactory;
+    private List<Client> birtdayClients;
 
     @Override
     public void init() throws ServletException {
@@ -38,7 +42,13 @@ public class MainPageServlet extends HttpServlet {
 
         try {
             clientList = clientService.findAllClients();
+            birtdayClients = clientService.findClientsWithBirthdayToday().orElse(new ArrayList<>());
             subscriptionList = subscriptionService.findAllSubscriptions().orElse(new ArrayList<>());
+
+            countOfPeopleInGym = (int) clientList.stream()
+                    .filter(p -> StatusEnum.IN.equals(p.getStatus()))
+                    .count();
+
         } catch (ServiceException e) {
             throw new ServletException(e.getMessage());
         }
@@ -49,6 +59,8 @@ public class MainPageServlet extends HttpServlet {
         String page = "/WEB-INF/pages/mainPage.jsp";
         request.setAttribute(CLIENTS_LIST_ATTRIBUTE, clientList);
         request.setAttribute(SUBSCRIPTIONS_LIST_ATTRIBUTE, subscriptionList);
+        request.setAttribute(CLIENTS_WITH_BIRTHDAY_TODAY, birtdayClients);
+        request.setAttribute(COUNT_OF_PEOPLE_IN_GYM, countOfPeopleInGym);
         request.setAttribute(CLEAR_PARAMETERS_ATTRIBUTE, false);
 
         response.setCharacterEncoding("UTF-8");

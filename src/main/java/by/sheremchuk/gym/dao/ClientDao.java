@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,6 +100,14 @@ public class ClientDao implements Dao {
         }
 
         return Optional.of(clients);
+    }
+
+    public Optional<List<Client>> findClientByBirthdayToday() throws DaoException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_REGEX);
+        String query = "SELECT * FROM clients WHERE MONTH(birthday) = MONTH('var') and DAY(birthday) = DAY('var')";
+        query = query.replaceAll(REPLACE_REGEX, simpleDateFormat.format(new Date()));
+
+        return getClient(query);
     }
 
     private Client createClient(ResultSet request) throws SQLException{

@@ -4,7 +4,7 @@
 <div class="birthdayToDay">Сегодня день рождения</div>
 <div class="containerNowInGym">
     <div style="font: normal 30px Arial, Helvetica;">Сейчас в зале: </div>
-    <div style="height: 35px; width: 40px; border: 1px solid black; float: right"></div>
+    <div style="height: 35px; width: 40px; border: 1px solid black; float: right">${peopleCountInGym}</div>
 </div>
 <div class="footer-table">
     <table>
@@ -15,7 +15,7 @@
             <th>Телефон</th>
         </tr>
         </thead>
-        <c:forEach var="client" items="${clients}">
+        <c:forEach var="client" items="${birthdayClients}">
             <tbody>
             <tr>
                 <td>${client.fio}</td>
